@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>d:\dodgeroopvsdod\dodger\dodger\</FILEPATH>
+      <FILENAME>main.cpp</FILENAME>
+      <LINE>25</LINE>
+      <COLUMN>20</COLUMN>
+    </SFA>
+    <DEFECTCODE>6244</DEFECTCODE>
+    <DESCRIPTION>Local declaration of 'deltaTime' hides previous declaration at line '14' of 'd:\dodgeroopvsdod\dodger\dodger\main.cpp'.</DESCRIPTION>
+    <FUNCTION>Component::Update</FUNCTION>
+    <DECORATED>?Update@Component@@UAEXM@Z</DECORATED>
+    <FUNCLINE>25</FUNCLINE>
+    <PATH>
+      <SFA>
+        <FILEPATH>d:\dodgeroopvsdod\dodger\dodger\</FILEPATH>
+        <FILENAME>main.cpp</FILENAME>
+        <LINE>14</LINE>
+        <COLUMN>15</COLUMN>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>d:\dodgeroopvsdod\dodger\dodger\</FILEPATH>
+      <FILENAME>main.cpp</FILENAME>
+      <LINE>46</LINE>
+      <COLUMN>13</COLUMN>
+    </SFA>
+    <DEFECTCODE>6244</DEFECTCODE>
+    <DESCRIPTION>Local declaration of 'deltaTime' hides previous declaration at line '14' of 'd:\dodgeroopvsdod\dodger\dodger\main.cpp'.</DESCRIPTION>
+    <FUNCTION>GameObject::Update</FUNCTION>
+    <DECORATED>?Update@GameObject@@QAEXM@Z</DECORATED>
+    <FUNCLINE>46</FUNCLINE>
+    <PATH>
+      <SFA>
+        <FILEPATH>d:\dodgeroopvsdod\dodger\dodger\</FILEPATH>
+        <FILENAME>main.cpp</FILENAME>
+        <LINE>14</LINE>
+        <COLUMN>15</COLUMN>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>d:\dodgeroopvsdod\dodger\dodger\</FILEPATH>
+      <FILENAME>main.cpp</FILENAME>
+      <LINE>92</LINE>
+      <COLUMN>13</COLUMN>
+    </SFA>
+    <DEFECTCODE>6244</DEFECTCODE>
+    <DESCRIPTION>Local declaration of 'deltaTime' hides previous declaration at line '14' of 'd:\dodgeroopvsdod\dodger\dodger\main.cpp'.</DESCRIPTION>
+    <FUNCTION>Fall::Update</FUNCTION>
+    <DECORATED>?Update@Fall@@UAEXM@Z</DECORATED>
+    <FUNCLINE>92</FUNCLINE>
+    <PATH>
+      <SFA>
+        <FILEPATH>d:\dodgeroopvsdod\dodger\dodger\</FILEPATH>
+        <FILENAME>main.cpp</FILENAME>
+        <LINE>14</LINE>
+        <COLUMN>15</COLUMN>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>d:\dodgeroopvsdod\dodger\dodger\</FILEPATH>
+      <FILENAME>main.cpp</FILENAME>
+      <LINE>182</LINE>
+      <COLUMN>28</COLUMN>
+    </SFA>
+    <DEFECTCODE>6246</DEFECTCODE>
+    <DESCRIPTION>Local declaration of 'go' hides declaration of the same name in outer scope. For additional information, see previous declaration at line '114' of 'd:\dodgeroopvsdod\dodger\dodger\main.cpp'.</DESCRIPTION>
+    <FUNCTION>main</FUNCTION>
+    <DECORATED>main</DECORATED>
+    <FUNCLINE>105</FUNCLINE>
+    <PATH>
+      <SFA>
+        <FILEPATH>d:\dodgeroopvsdod\dodger\dodger\</FILEPATH>
+        <FILENAME>main.cpp</FILENAME>
+        <LINE>114</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+    </PATH>
+  </DEFECT>
+</DEFECTS>
