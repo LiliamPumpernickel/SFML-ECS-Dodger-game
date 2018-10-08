@@ -12,6 +12,7 @@ typedef vector<Component*> componentVector;
 typedef vector<GameObject*> GOVector;
 
 
+
 class Component {
 	GameObject* parentGameObject;
 	
@@ -108,6 +109,14 @@ void moveAll(componentVector* fallComponents, float deltaTime) {
 }
 
 
+typedef vector<Sprite*> SpriteVector;
+
+
+void drawAllObstacleSprites(sf::RenderWindow* window, SpriteVector* spriteComponents) {
+	for (auto sc : *spriteComponents) {
+		window->draw(sc->sprite);
+	}
+}
 
 int main()
 {
@@ -138,6 +147,7 @@ int main()
 	texture.loadFromFile("11_fire_spritesheet.png", sf::IntRect(40, 40, 50, 50));
 
 	componentVector fallComponents;
+	SpriteVector spriteComponents;
 
 
 	for ( int i = 0; i < 10000; i++)
@@ -155,6 +165,7 @@ int main()
 		gameObject->addComponent(fall);
 		gameObjects.push_back(gameObject);
 		fallComponents.push_back(fall);
+		spriteComponents.push_back(s);
 	}
 
 	sf::Time time;
@@ -188,14 +199,10 @@ int main()
 		window.clear();
 		window.draw(mysprite->sprite);
 		moveAll(&fallComponents, time.asSeconds());
-		for (auto go : gameObjects) {
-			if (go->name == "obstacle") {
-				Sprite* s = go->GetComponent<Sprite>();
-				window.draw(s->sprite);
-			}
-		}
+		drawAllObstacleSprites(&window, &spriteComponents);
 		
 		
+
 		window.display();
 
 	}
