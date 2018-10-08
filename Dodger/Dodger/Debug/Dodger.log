@@ -1,2 +1,6 @@
-﻿  Dodger.vcxproj -> D:\DodgerOOPvsDOD\Dodger\Debug\Dodger.exe
+﻿  main.cpp
+d:\dodgeroopvsdod\dodger\dodger\main.cpp(96): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\dodgeroopvsdod\dodger\dodger\main.cpp(148): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\dodgeroopvsdod\dodger\dodger\main.cpp(149): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  Dodger.vcxproj -> D:\DodgerOOPvsDOD\Dodger\Debug\Dodger.exe
   Dodger.vcxproj -> D:\DodgerOOPvsDOD\Dodger\Debug\Dodger.pdb (Full PDB)

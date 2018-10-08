@@ -1,0 +1,7 @@
+Dodger/Debug/*
+Dodger/Release/*
+Dodger/Dodger.VC.db
+Dodger/Dodger.VC.VC.opendb
+Dodger/Debug/
+Dodger/Dodger.VC.VC.opendb
+Dodger/Dodger.VC.db

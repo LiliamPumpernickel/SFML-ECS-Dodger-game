@@ -64,6 +64,8 @@ class GameObject{
 
 
 
+
+
 class Transform : public Component {
 	public:
 		float x, y;
@@ -99,6 +101,13 @@ class Fall : public Component {
 };
 
 
+void moveAll(componentVector* fallComponents, float deltaTime) {
+	for (auto fc : *fallComponents) {
+		fc->Update(deltaTime);
+	}
+}
+
+
 
 int main()
 {
@@ -128,10 +137,10 @@ int main()
 
 	texture.loadFromFile("11_fire_spritesheet.png", sf::IntRect(40, 40, 50, 50));
 
-	
+	componentVector fallComponents;
 
 
-	for ( int i = 0; i < 20; i++)
+	for ( int i = 0; i < 10000; i++)
 	{
 		GameObject* gameObject = new GameObject("obstacle");
 		gameObject->addComponent(new Sprite(&texture));
@@ -145,6 +154,7 @@ int main()
 		Fall* fall = new Fall();
 		gameObject->addComponent(fall);
 		gameObjects.push_back(gameObject);
+		fallComponents.push_back(fall);
 	}
 
 	sf::Time time;
@@ -177,9 +187,9 @@ int main()
 
 		window.clear();
 		window.draw(mysprite->sprite);
+		moveAll(&fallComponents, time.asSeconds());
 		for (auto go : gameObjects) {
 			if (go->name == "obstacle") {
-				go->Update(time.asSeconds());
 				Sprite* s = go->GetComponent<Sprite>();
 				window.draw(s->sprite);
 			}
