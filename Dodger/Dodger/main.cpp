@@ -1,6 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <stdlib.h>
 #include <math.h>
+#include <chrono>
+#include <iostream>
+
+using namespace std::chrono;
 
 using namespace std;
 
@@ -15,7 +19,7 @@ typedef vector<GameObject*> GOVector;
 
 class Component {
 	GameObject* parentGameObject;
-	
+
 public:
 	virtual ~Component() {};
 	void setParentGameObject(GameObject& parentGO) {
@@ -29,36 +33,36 @@ public:
 	}
 };
 
-class GameObject{
-	private:
-		componentVector componentArray;
-	public:
-		string name;
-		GameObject(string&& string) :
-			name(string) {};
+class GameObject {
+private:
+	componentVector componentArray;
+public:
+	string name;
+	GameObject(string&& string) :
+		name(string) {};
 
-		void addComponent(Component* component) {
-			component->setParentGameObject(*this);
-			componentArray.push_back(component);
+	void addComponent(Component* component) {
+		component->setParentGameObject(*this);
+		componentArray.push_back(component);
+	}
+
+	void Update(float deltaTime) {
+		for (auto c : componentArray) {
+			c->Update(deltaTime);
 		}
+	}
 
-		void Update(float deltaTime) {
-			for (auto c : componentArray) {
-				c->Update(deltaTime);
-			}
-		}
-
-		template<typename T>
-		T* GetComponent()
+	template<typename T>
+	T* GetComponent()
+	{
+		for (auto i : componentArray)
 		{
-			for (auto i : componentArray)
-			{
-				T* c = dynamic_cast<T*>(i);
-				if (c != nullptr)
-					return c;
-			}
-			return nullptr;
+			T* c = dynamic_cast<T*>(i);
+			if (c != nullptr)
+				return c;
 		}
+		return nullptr;
+	}
 
 
 };
@@ -68,37 +72,37 @@ class GameObject{
 
 
 class Transform : public Component {
-	public:
-		float x, y;
+public:
+	float x, y;
 };
 
 class Sprite : public Component {
-	
+
 	sf::Texture _texture;
-	public:
-		sf::Sprite sprite;
-		Sprite(sf::Texture *texture) : _texture(*texture) { sprite.setTexture(_texture); };
-		void setTexture(sf::Texture&& texture) {
-			_texture = texture;
-		}
-		void UpdateTexture() {
-			sprite.setTexture(_texture);
-		}
+public:
+	sf::Sprite sprite;
+	Sprite(sf::Texture *texture) : _texture(*texture) { sprite.setTexture(_texture); };
+	void setTexture(sf::Texture&& texture) {
+		_texture = texture;
+	}
+	void UpdateTexture() {
+		sprite.setTexture(_texture);
+	}
 
 
 };
 
 class Fall : public Component {
-	public:
-		void Update(float deltaTime) {
-			Transform* t = getParent()->GetComponent<Transform>();
-			t->y += 200.f*deltaTime;
-			if (t->y > 800) {
-				t->y = (rand() % 700 + 100)*-1; t->x = (rand() % 760 + 1);
-			}
-			Sprite* s = getParent()->GetComponent<Sprite>();
-			s->sprite.setPosition(t->x, t->y);
+public:
+	void Update(float deltaTime) {
+		Transform* t = getParent()->GetComponent<Transform>();
+		t->y += 200.f*deltaTime;
+		if (t->y > 800) {
+			t->y = (rand() % 700 + 100)*-1; t->x = (rand() % 760 + 1);
 		}
+		Sprite* s = getParent()->GetComponent<Sprite>();
+		s->sprite.setPosition(t->x, t->y);
+	}
 };
 
 
@@ -124,7 +128,7 @@ int main()
 	GOVector gameObjects;
 
 	sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!");
-	
+
 	sf::Texture texture;
 	texture.loadFromFile("Heal Totem Sprite Sheet.png", sf::IntRect(0, 0, 32, 32));
 	GameObject go("player");
@@ -150,7 +154,7 @@ int main()
 	SpriteVector spriteComponents;
 
 
-	for ( int i = 0; i < 10000; i++)
+	for (int i = 0; i < 10000; i++)
 	{
 		GameObject* gameObject = new GameObject("obstacle");
 		gameObject->addComponent(new Sprite(&texture));
@@ -170,8 +174,11 @@ int main()
 
 	sf::Time time;
 
+	high_resolution_clock::time_point t1;
+
 	while (window.isOpen())
 	{
+		t1 = high_resolution_clock::now();
 		time = clock.restart();
 		sf::Event event;
 		while (window.pollEvent(event))
@@ -180,7 +187,7 @@ int main()
 				window.close();
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
 				tr = go.GetComponent<Transform>();
-				tr->x -= 20.f ;
+				tr->x -= 20.f;
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
 				tr = go.GetComponent<Transform>();
@@ -189,7 +196,7 @@ int main()
 		}
 
 
-		
+
 
 
 
@@ -200,11 +207,13 @@ int main()
 		window.draw(mysprite->sprite);
 		moveAll(&fallComponents, time.asSeconds());
 		drawAllObstacleSprites(&window, &spriteComponents);
-		
-		
+
+
 
 		window.display();
-
+		high_resolution_clock::time_point t2 = high_resolution_clock::now();
+		duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
+		std::cout << "It took me " << time_span.count() * 1000 << " ms. \n";
 	}
 
 	return 0;
